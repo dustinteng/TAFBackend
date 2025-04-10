@@ -6,8 +6,10 @@ import re
 from graphene import ObjectType, String, List, Schema, Argument
 from graphql_server.flask import GraphQLView
 from werkzeug.utils import secure_filename
+from flask_cors import CORS  # Import Flask-CORS
 
 app = Flask(__name__)
+CORS(app)  # Enable Cross-Origin Resource Sharing (CORS)
 
 # Configuration
 UPLOAD_FOLDER = 'uploads'
@@ -16,7 +18,6 @@ ALLOWED_EXTENSIONS = {'csv'}
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # SQLite Connection
-
 def get_db_connection():
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
